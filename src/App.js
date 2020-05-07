@@ -44,6 +44,7 @@ function App() {
       .then(createPokeData)
       .then((PokeData) => {
         setPokemon(PokeData);
+        playAudio();
         setErrorMessage("");
       })
       //.catch(console.error);
@@ -62,6 +63,7 @@ function App() {
       .then((PokeData) => {
         setPokemon(PokeData);
         setErrorMessage("");
+        playAudio();
       })
       .catch(console.error);
   };
@@ -72,9 +74,18 @@ function App() {
     setRandomPokemon("");
   };
 
+  //play sound
+  let audio = new Audio("./sounds/Pokemon-BattleMusic.mp3");
+  const playAudio = () => {
+    audio.play();
+  };
+
+  //WHY DOESN'T THIS WORK???
+
   return (
     <main>
       <h1 className="title">Let's Go Pokemon Battle!</h1>
+      {/* <audio src="../public/sounds/Pokemon-BattleMusic.mp3"></audio> */}
 
       {pokemon && randomPokemon ? (
         <section className="gameplay">
