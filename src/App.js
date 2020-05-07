@@ -13,8 +13,8 @@ function App() {
 
   // generates opponent's pokemon
   React.useEffect(() => {
-      getRandmon();
-  }, [pokemon])
+    getRandmon();
+  }, [pokemon]);
 
   // creates object with pokemon data
   const createPokeData = (data) => {
@@ -51,9 +51,6 @@ function App() {
     // getRandmon();
   };
 
-
-
-
   const getRandmon = () => {
     const randomId = Math.floor(Math.random() * 151) + 1;
 
@@ -65,10 +62,10 @@ function App() {
 
   return (
     <main>
-    <h1>Let's Go Pokemon Battle!</h1>
+      <h1 className="title">Let's Go Pokemon Battle!</h1>
 
-      <div>
-        <form onSubmit={handleClick} className="select-pokemon-form">
+      <div className="select-pokemon-form">
+        <form onSubmit={handleClick}>
           <label htmlFor="pokemon-name">
             <input
               type="text"
@@ -79,21 +76,27 @@ function App() {
               onChange={(event) => setInput(event.target.value)}
             ></input>
           </label>
-          <button type="submit">I Choose You!</button>
+          <button className="choose" type="submit">
+            I Choose You!
+          </button>
         </form>
-        <button onClick={handleClick}>Generate Random Pokemon</button>
+        <button className="random" onClick={handleClick}>
+          Generate Random Pokemon
+        </button>
       </div>
       {pokemon && randomPokemon ? (
-        <div>
-          <DisplayPokemon name={pokemon.name} image={pokemon.image} />
-          <DisplayPokemon
-            name={randomPokemon.name}
-            image={randomPokemon.image}
-          />
+        <section className="gameplay">
+          <div className="display-pokemon">
+            <DisplayPokemon name={pokemon.name} image={pokemon.image} />
+            <DisplayPokemon
+              name={randomPokemon.name}
+              image={randomPokemon.image}
+            />
+          </div>
           <Buttons pokemon={pokemon} randomPokemon={randomPokemon} />
-        </div>
+        </section>
       ) : (
-        <div>
+        <div className="waiting">
           <h3>Please Select A Pokemon</h3>
           <img
             src="https://media2.giphy.com/media/JgCZ2hksM1abS/source.gif"

@@ -35,8 +35,15 @@ function Buttons({ pokemon, randomPokemon }) {
 
   return (
     <div>
-      <p data-testid="my-health">My Health: {myHealthBar < 0 ? 0:myHealthBar}</p>
-      <p data-testid="enemy-health">Enemy Health: {vsHealthBar < 0 ? 0:vsHealthBar}</p>
+      <div className="health-bars">
+        {" "}
+        <p data-testid="my-health">
+          My Health: {myHealthBar < 0 ? 0 : myHealthBar}
+        </p>
+        <p data-testid="enemy-health">
+          Enemy Health: {vsHealthBar < 0 ? 0 : vsHealthBar}
+        </p>
+      </div>
 
       {pokemonAttack ? (
         <p>
@@ -49,11 +56,15 @@ function Buttons({ pokemon, randomPokemon }) {
       {myHealthBar <= 0 || vsHealthBar <= 0 ? (
         <h3>Game over! </h3>
       ) : (
-        <div>
-          <button disabled={disable} onClick={handleAttackClick}>
+        <div className='actionBtns'>
+          <button
+            className="attackBtn"
+            disabled={disable}
+            onClick={handleAttackClick}
+          >
             Use Attack
           </button>
-          <button disabled={disable} onClick={eatBerry}>
+          <button className="berryBtn" disabled={disable} onClick={eatBerry}>
             Eat A Berry
           </button>
         </div>

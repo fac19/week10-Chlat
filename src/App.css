@@ -1,38 +1,99 @@
-.App {
+body {
+  background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2fb2821a-1406-4a1d-9b04-6668f278e944/d843okx-eb13e8e4-0fa4-4fa9-968a-e0f36ff168de.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMmZiMjgyMWEtMTQwNi00YTFkLTliMDQtNjY2OGYyNzhlOTQ0XC9kODQzb2t4LWViMTNlOGU0LTBmYTQtNGZhOS05NjhhLWUwZjM2ZmYxNjhkZS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.bhj0Qs9G9h8on8c0mY3t31JfbxhhtPT09e-I3RmEQ1I');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+main {
   text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  margin-top: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button {
+  font-family: 'Gudea', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title {
+  margin-top: 50px;
+  padding: 2rem;
+  text-align: center;
+  text-shadow: 4px 5px rgb(9, 12, 163);
+  color: yellow;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.select-pokemon-form {
+  margin: 0 auto;
+  width: 30%;
+  border: 1px dashed black;
+  background-color: lightgreen;
+  padding-top: 2rem;
+}
+
+.choose {
+  margin-left: 7px;
+  font-size: 1rem;
+}
+
+.random {
+  margin: 1rem auto;
+  font-size: 1srem;
+
+}
+
+.waiting {
+  margin-top: 5rem;
+}
+
+.gameplay {
+  margin: 30px;
+  padding: 10px;
+}
+
+.display-pokemon {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.pokemon-box {
+  margin: 0 4%;
+  padding: 2rem 3rem;
+  width: 20%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pokemon-box h2 {
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.931);
+}
+
+.pokemon-box img {
+  width: 80%;
+}
+
+.health-bars p {
+  display: inline;
+  margin: 4rem
+}
+
+.actionBtns {
+  margin: 2rem 0;
+}
+
+.attackBtn {
+  border: 2px solid black;
+  margin: 0 1rem;
+  padding: 7px 12px;
+  border-radius: 7px;
+  background-color: rgb(189, 5, 5);
+  font-size: 1.6rem;
+  color: white
+}
+
+.berryBtn {
+  border: 2px solid black;
+  padding: 7px 12px;
+  border-radius: 7px;
+  background-color: rgb(17, 20, 165);
+  font-size: 1.6rem;
+  color: white
 }
