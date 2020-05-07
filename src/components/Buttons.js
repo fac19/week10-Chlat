@@ -35,8 +35,8 @@ function Buttons({ pokemon, randomPokemon }) {
 
   return (
     <div>
-      <p>My Health: {myHealthBar}</p>
-      <p>Enemy Health: {vsHealthBar}</p>
+      <p data-testid="my-health">My Health: {myHealthBar}</p>
+      <p data-testid="enemy-health">Enemy Health: {vsHealthBar}</p>
 
       {pokemonAttack ? (
         <p>
