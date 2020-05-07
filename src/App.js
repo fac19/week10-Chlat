@@ -3,6 +3,7 @@ import "./App.css";
 import getPokemonData from "./getPokemonData.js";
 import DisplayPokemon from "./components/DisplayPokemon";
 import Buttons from "./components/Buttons";
+import music from "./sounds/Pokemon-BattleMusic.mp3";
 
 function App() {
   // form input
@@ -44,9 +45,9 @@ function App() {
       .then(createPokeData)
       .then((PokeData) => {
         setPokemon(PokeData);
-        playAudio();
         setErrorMessage("");
       })
+      .then(playAudio)
       //.catch(console.error);
       .catch(() => {
         setErrorMessage("That's Not A Pokemon!");
@@ -65,6 +66,7 @@ function App() {
         setErrorMessage("");
       })
       .then(playAudio)
+
       .catch(console.error);
   };
 
@@ -72,23 +74,26 @@ function App() {
   const handlePlayAgain = () => {
     setPokemon("");
     setRandomPokemon("");
+    playAudio();
   };
 
-  //play sound
   const playAudio = () => {
-    let audio = document.querySelector("audio");
-    audio.play();
-  };
+    const audio = document.querySelector("audio");
 
-  //WHY DOESN'T THIS WORK???
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
 
   return (
     <main>
       <h1 className="title">Let's Go Pokemon Battle!</h1>
       <audio>
-        <source src="../public/sounds/Pokemon-BattleMusic.mp3"></source>
+        <source src={music}></source>
       </audio>
-
       {pokemon && randomPokemon ? (
         <section className="gameplay">
           <div className="display-pokemon">
@@ -102,6 +107,7 @@ function App() {
           <button className="actionBtn" id="again" onClick={handlePlayAgain}>
             Challenge Another Trainer!
           </button>
+          {/* <button onClick={playAudio}>Play Audio</button> */}
         </section>
       ) : (
         <section>

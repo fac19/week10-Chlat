@@ -60,16 +60,19 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  animation-name: pixelateIn;
-  animation-duration: 2s;
+  animation-name: fadeIn;
+  animation-duration: 3s;
+  filter: blur(0px);
 }
 
-@keyframes pixelateIn {
+@keyframes fadeIn {
   0% {
-    opacity: 0
+    filter: blur(10px);
+    opacity: 0.1
   }
 
   100% {
+    filter: blur(0px);
     opacity: 1
   }
 }
