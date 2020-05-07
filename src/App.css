@@ -2,6 +2,7 @@ body {
   background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2fb2821a-1406-4a1d-9b04-6668f278e944/d843okx-eb13e8e4-0fa4-4fa9-968a-e0f36ff168de.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMmZiMjgyMWEtMTQwNi00YTFkLTliMDQtNjY2OGYyNzhlOTQ0XC9kODQzb2t4LWViMTNlOGU0LTBmYTQtNGZhOS05NjhhLWUwZjM2ZmYxNjhkZS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.bhj0Qs9G9h8on8c0mY3t31JfbxhhtPT09e-I3RmEQ1I');
   background-size: cover;
   background-repeat: no-repeat;
+  height: 100%;
 }
 
 main {
@@ -30,19 +31,24 @@ button {
   padding-top: 2rem;
 }
 
-.choose {
-  margin-left: 7px;
+#choose {
   font-size: 1rem;
+  margin-top: 1rem;
+  background-color: rgb(209, 6, 6)
 }
 
-.random {
-  margin: 1rem auto;
-  font-size: 1srem;
+#random {
+  font-size: 0.8rem;
+  margin: 0.5rem;
+  background-color: rgb(65, 65, 66)
+}
 
+#pokemon-name {
+  font-size: 1.2rem;
 }
 
 .waiting {
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .gameplay {
@@ -54,6 +60,18 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  animation-name: pixelateIn;
+  animation-duration: 2s;
+}
+
+@keyframes pixelateIn {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
 }
 
 .pokemon-box {
@@ -63,7 +81,8 @@ button {
 }
 
 .pokemon-box h2 {
-  text-shadow: 1px 1px rgba(255, 255, 255, 0.931);
+  color: rgb(32, 32, 32);
+  text-shadow: 2px 1px rgba(255, 255, 255, 0.931);
 }
 
 .pokemon-box img {
@@ -75,25 +94,37 @@ button {
   margin: 4rem
 }
 
-.actionBtns {
+.button-box {
   margin: 2rem 0;
 }
 
-.attackBtn {
+.actionBtn {
   border: 2px solid black;
   margin: 0 1rem;
   padding: 7px 12px;
   border-radius: 7px;
-  background-color: rgb(189, 5, 5);
   font-size: 1.6rem;
   color: white
 }
 
-.berryBtn {
-  border: 2px solid black;
-  padding: 7px 12px;
-  border-radius: 7px;
+.actionBtn:hover {
+  color: rgb(219, 198, 198)
+}
+
+#attack {
+  background-color: rgb(189, 5, 5);
+}
+
+#berry {
   background-color: rgb(17, 20, 165);
-  font-size: 1.6rem;
-  color: white
+}
+
+#again {
+  font-size: 1.2rem;
+  background-color: rgb(65, 65, 66)
+}
+
+.fight {
+  padding: 1rem;
+  font-size: 1.2rem;
 }

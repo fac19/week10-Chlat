@@ -63,8 +63,8 @@ function App() {
       .then((PokeData) => {
         setPokemon(PokeData);
         setErrorMessage("");
-        playAudio();
       })
+      .then(playAudio)
       .catch(console.error);
   };
 
@@ -75,8 +75,8 @@ function App() {
   };
 
   //play sound
-  let audio = new Audio("./sounds/Pokemon-BattleMusic.mp3");
   const playAudio = () => {
+    let audio = document.querySelector("audio");
     audio.play();
   };
 
@@ -85,7 +85,9 @@ function App() {
   return (
     <main>
       <h1 className="title">Let's Go Pokemon Battle!</h1>
-      {/* <audio src="../public/sounds/Pokemon-BattleMusic.mp3"></audio> */}
+      <audio>
+        <source src="../public/sounds/Pokemon-BattleMusic.mp3"></source>
+      </audio>
 
       {pokemon && randomPokemon ? (
         <section className="gameplay">
@@ -97,7 +99,9 @@ function App() {
             />
           </div>
           <Buttons pokemon={pokemon} randomPokemon={randomPokemon} />
-          <button onClick={handlePlayAgain}>Challenge Another Trainer!</button>
+          <button className="actionBtn" id="again" onClick={handlePlayAgain}>
+            Challenge Another Trainer!
+          </button>
         </section>
       ) : (
         <section>
@@ -115,11 +119,15 @@ function App() {
                   onChange={(event) => setInput(event.target.value)}
                 ></input>
               </label>
-              <button className="choose" type="submit">
+              <button className="actionBtn" id="choose" type="submit">
                 I Choose You!
               </button>
             </form>
-            <button className="random" onClick={handleGeneratePokemon}>
+            <button
+              className="actionBtn"
+              id="random"
+              onClick={handleGeneratePokemon}
+            >
               Generate Random Pokemon
             </button>
           </div>
