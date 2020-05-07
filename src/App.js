@@ -11,6 +11,11 @@ function App() {
   const [pokemon, setPokemon] = React.useState("");
   const [randomPokemon, setRandomPokemon] = React.useState("");
 
+  // generates opponent's pokemon
+  React.useEffect(() => {
+      getRandmon();
+  }, [pokemon])
+
   // creates object with pokemon data
   const createPokeData = (data) => {
     const PokeData = {
@@ -34,7 +39,7 @@ function App() {
         .then(createPokeData)
         .then((PokeData) => setPokemon(PokeData))
         .catch(console.error);
-      getRandmon();
+      // getRandmon();
     }
 
     if (!input) return;
@@ -43,8 +48,11 @@ function App() {
       .then(createPokeData)
       .then((PokeData) => setPokemon(PokeData))
       .catch(console.error);
-    getRandmon();
+    // getRandmon();
   };
+
+
+
 
   const getRandmon = () => {
     const randomId = Math.floor(Math.random() * 151) + 1;
@@ -57,15 +65,16 @@ function App() {
 
   return (
     <main>
+    <h1>Let's Go Pokemon Battle!</h1>
+
       <div>
         <form onSubmit={handleClick} className="select-pokemon-form">
-          <p>Choose A Pokemon</p>
           <label htmlFor="pokemon-name">
             <input
               type="text"
               name="pokemon-name"
               id="pokemon-name"
-              placeholder="ditto"
+              placeholder="Choose a pokemon"
               value={input}
               onChange={(event) => setInput(event.target.value)}
             ></input>
@@ -85,7 +94,7 @@ function App() {
         </div>
       ) : (
         <div>
-          <h1>Please Select A Pokemon</h1>
+          <h3>Please Select A Pokemon</h3>
           <img
             src="https://media2.giphy.com/media/JgCZ2hksM1abS/source.gif"
             alt="pokeball"
