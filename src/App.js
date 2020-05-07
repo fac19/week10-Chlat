@@ -11,6 +11,11 @@ function App() {
   const [pokemon, setPokemon] = React.useState("");
   const [randomPokemon, setRandomPokemon] = React.useState("");
 
+  // generates opponent's pokemon
+  React.useEffect(() => {
+      getRandmon();
+  }, [pokemon])
+
   // creates object with pokemon data
   const createPokeData = (data) => {
     const PokeData = {
@@ -34,7 +39,7 @@ function App() {
         .then(createPokeData)
         .then((PokeData) => setPokemon(PokeData))
         .catch(console.error);
-      getRandmon();
+      // getRandmon();
     }
 
     if (!input) return;
@@ -43,8 +48,11 @@ function App() {
       .then(createPokeData)
       .then((PokeData) => setPokemon(PokeData))
       .catch(console.error);
-    getRandmon();
+    // getRandmon();
   };
+
+
+
 
   const getRandmon = () => {
     const randomId = Math.floor(Math.random() * 151) + 1;
