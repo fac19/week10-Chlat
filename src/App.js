@@ -67,53 +67,60 @@ function App() {
   };
 
   // handles play again
-  const handelPlayAgain = () => {
+  const handlePlayAgain = () => {
     setPokemon("");
     setRandomPokemon("");
   };
 
   return (
     <main>
-      <h1>Let's Go Pokemon Battle!</h1>
+      <h1 className="title">Let's Go Pokemon Battle!</h1>
 
       {pokemon && randomPokemon ? (
-        <div>
-          <button onClick={handelPlayAgain}>Challenge Another Trainer!</button>
-
-          <DisplayPokemon name={pokemon.name} image={pokemon.image} />
-          <DisplayPokemon
-            name={randomPokemon.name}
-            image={randomPokemon.image}
-          />
+        <section className="gameplay">
+          <div className="display-pokemon">
+            <DisplayPokemon name={pokemon.name} image={pokemon.image} />
+            <DisplayPokemon
+              name={randomPokemon.name}
+              image={randomPokemon.image}
+            />
+          </div>
           <Buttons pokemon={pokemon} randomPokemon={randomPokemon} />
-        </div>
+          <button onClick={handlePlayAgain}>Challenge Another Trainer!</button>
+        </section>
       ) : (
-        <div>
+        <section>
           <p className="alert">{errMessage}</p>
-          <form onSubmit={handlePokemonSubmit} className="select-pokemon-form">
-            <label htmlFor="pokemon-name">
-              <input
-                type="text"
-                name="pokemon-name"
-                id="pokemon-name"
-                placeholder="Choose a pokemon"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-              ></input>
-            </label>
-            <button type="submit">I Choose You!</button>
-          </form>
-          <button onClick={handleGeneratePokemon}>
-            Generate Random Pokemon
-          </button>
 
-          <h3>Please Select A Pokemon</h3>
-          <img
-            src="https://media2.giphy.com/media/JgCZ2hksM1abS/source.gif"
-            alt="pokeball"
-            width="100px"
-          ></img>
-        </div>
+          <div className="select-pokemon-form">
+            <form onSubmit={handlePokemonSubmit}>
+              <label htmlFor="pokemon-name">
+                <input
+                  type="text"
+                  name="pokemon-name"
+                  id="pokemon-name"
+                  placeholder="Choose a pokemon"
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                ></input>
+              </label>
+              <button className="choose" type="submit">
+                I Choose You!
+              </button>
+            </form>
+            <button className="random" onClick={handleGeneratePokemon}>
+              Generate Random Pokemon
+            </button>
+          </div>
+          <div className="waiting">
+            <h3>Please Select A Pokemon</h3>
+            <img
+              src="https://media2.giphy.com/media/JgCZ2hksM1abS/source.gif"
+              alt="pokeball"
+              width="100px"
+            ></img>
+          </div>
+        </section>
       )}
     </main>
   );
