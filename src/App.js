@@ -3,6 +3,7 @@ import "./App.css";
 import getPokemonData from "./getPokemonData.js";
 import DisplayPokemon from "./components/DisplayPokemon";
 import Buttons from "./components/Buttons";
+import music from "./sounds/Pokemon-BattleMusic.mp3";
 
 function App() {
   // form input
@@ -44,9 +45,9 @@ function App() {
       .then(createPokeData)
       .then((PokeData) => {
         setPokemon(PokeData);
-        playAudio();
         setErrorMessage("");
       })
+      .then(playAudio)
       //.catch(console.error);
       .catch(() => {
         setErrorMessage("That's Not A Pokemon!");
@@ -63,8 +64,9 @@ function App() {
       .then((PokeData) => {
         setPokemon(PokeData);
         setErrorMessage("");
-        playAudio();
       })
+      .then(playAudio)
+
       .catch(console.error);
   };
 
@@ -72,21 +74,26 @@ function App() {
   const handlePlayAgain = () => {
     setPokemon("");
     setRandomPokemon("");
+    playAudio();
   };
 
-  //play sound
-  let audio = new Audio("./sounds/Pokemon-BattleMusic.mp3");
   const playAudio = () => {
-    audio.play();
-  };
+    const audio = document.querySelector("audio");
 
-  //WHY DOESN'T THIS WORK???
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
 
   return (
     <main>
       <h1 className="title">Let's Go Pokemon Battle!</h1>
-      {/* <audio src="../public/sounds/Pokemon-BattleMusic.mp3"></audio> */}
-
+      <audio>
+        <source src={music}></source>
+      </audio>
       {pokemon && randomPokemon ? (
         <section className="gameplay">
           <div className="display-pokemon">
@@ -97,7 +104,10 @@ function App() {
             />
           </div>
           <Buttons pokemon={pokemon} randomPokemon={randomPokemon} />
-          <button onClick={handlePlayAgain}>Challenge Another Trainer!</button>
+          <button className="actionBtn" id="again" onClick={handlePlayAgain}>
+            Challenge Another Trainer!
+          </button>
+          {/* <button onClick={playAudio}>Play Audio</button> */}
         </section>
       ) : (
         <section>
@@ -115,11 +125,15 @@ function App() {
                   onChange={(event) => setInput(event.target.value)}
                 ></input>
               </label>
-              <button className="choose" type="submit">
+              <button className="actionBtn" id="choose" type="submit">
                 I Choose You!
               </button>
             </form>
-            <button className="random" onClick={handleGeneratePokemon}>
+            <button
+              className="actionBtn"
+              id="random"
+              onClick={handleGeneratePokemon}
+            >
               Generate Random Pokemon
             </button>
           </div>
