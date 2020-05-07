@@ -56,7 +56,7 @@ function Buttons({ pokemon, randomPokemon }) {
       {myHealthBar <= 0 || vsHealthBar <= 0 ? (
         <h3>Game over! </h3>
       ) : (
-        <div className='actionBtns'>
+        <div className="actionBtns">
           <button
             className="attackBtn"
             disabled={disable}
