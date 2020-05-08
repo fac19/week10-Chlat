@@ -19,9 +19,9 @@ const StartGameForm = (props) => {
       name: data.name,
       image: data.sprites.front_default,
       hp: data.stats["5"].base_stat,
-      move:
-        data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
+      move: data.moves.map((move) => move.move["name"]),
     };
+    console.log(PokeData);
     return PokeData;
   };
 

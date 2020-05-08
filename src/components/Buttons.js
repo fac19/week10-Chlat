@@ -13,7 +13,11 @@ function Buttons({ pokemon, randomPokemon }) {
     const vsDamage = Math.ceil(Math.random() * 10);
     setMyHealthBar(myHealthBar - vsDamage);
     setPokemonName(randomPokemon.name);
-    setPokemonAttack(randomPokemon.move);
+    setPokemonAttack(
+      randomPokemon.move[
+        Math.floor(Math.random() * randomPokemon.move.length - 1)
+      ]
+    );
     setTimeout(() => setDisable(false), 1500);
     playSound(attackSound);
   };
@@ -22,7 +26,9 @@ function Buttons({ pokemon, randomPokemon }) {
     const damage = Math.ceil(Math.random() * 10);
     setVsHealthBar(vsHealthBar - damage);
     setPokemonName(pokemon.name);
-    setPokemonAttack(pokemon.move);
+    setPokemonAttack(
+      pokemon.move[Math.floor(Math.random() * randomPokemon.move.length - 1)]
+    );
     setDisable(true);
     setTimeout(enemyAttack, 1500);
     playSound(attackSound);
