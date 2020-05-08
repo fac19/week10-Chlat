@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Home
 
-![home](https://i.imgur.com/5ji9ipL.png)
+![home](https://i.imgur.com/WUT8bj3.png)
 
 ## Battle
 
