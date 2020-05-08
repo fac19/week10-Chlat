@@ -2,6 +2,8 @@
 
 ## Choose Your Pokemon And Battle!!
 
+![battle](https://media.giphy.com/media/7ISIRaCMrgFfa/giphy.gif)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Home
