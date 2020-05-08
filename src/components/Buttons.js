@@ -15,7 +15,7 @@ function Buttons({ pokemon, randomPokemon }) {
     setPokemonName(randomPokemon.name);
     setPokemonAttack(randomPokemon.move);
     setTimeout(() => setDisable(false), 1500);
-    playAudio(attackSound);
+    playSound(attackSound);
   };
 
   const handleAttackClick = () => {
@@ -25,7 +25,7 @@ function Buttons({ pokemon, randomPokemon }) {
     setPokemonAttack(pokemon.move);
     setDisable(true);
     setTimeout(enemyAttack, 1500);
-    playAudio(attackSound);
+    playSound(attackSound);
   };
 
   const eatBerry = () => {
@@ -35,10 +35,10 @@ function Buttons({ pokemon, randomPokemon }) {
     setPokemonAttack("miracle berry");
     setDisable(true);
     setTimeout(enemyAttack, 1500);
-    playAudio(berrySound);
+    playSound(berrySound);
   };
 
-  const playAudio = (selectedSound) => {
+  const playSound = (selectedSound) => {
     const sound = document.querySelector("#action-sound");
     if (!sound) return;
     sound.src = selectedSound;
