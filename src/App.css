@@ -28,8 +28,15 @@ button:disabled {
   color: yellow;
 }
 
+.alert {
+  text-shadow: 1px 2px rgb(0, 0, 0);
+  color: red;
+
+}
+
 .select-pokemon-form {
   margin: 0 auto;
+  padding: 1.5em;
   width: 30%;
   border: 1px dashed black;
   background-color: lightgreen;
@@ -37,19 +44,23 @@ button:disabled {
 }
 
 #choose {
-  font-size: 1rem;
+  font-size: 0.9em;
   margin-top: 1rem;
-  background-color: rgb(209, 6, 6)
+  background-color: rgb(209, 6, 6);
+  width: 60%;
 }
 
 #random {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin: 0.5rem;
-  background-color: rgb(65, 65, 66)
+  background-color: rgb(65, 65, 66);
+  width: 80%;
 }
 
 #pokemon-name {
+  padding: 0.2em;
   font-size: 1.2rem;
+  width: 80%;
 }
 
 .waiting {
@@ -143,4 +154,26 @@ button:disabled {
 .fight {
   padding: 1rem;
   font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .title {
+    font-size: 1.4em;
+  }
+
+  #pokemon-name {
+    font-size: 0.8em;
+  }
+
+  #choose {
+    font-size: 0.7rem;
+  }
+
+  #random {
+    font-size: 0.6rem;
+  }
+
+  .waiting {
+    font-size: 0.8em;
+  }
 }
