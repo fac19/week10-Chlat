@@ -13,6 +13,11 @@ main {
 
 button {
   font-family: 'Gudea', sans-serif;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
 }
 
 .title {
@@ -118,8 +123,16 @@ button {
   background-color: rgb(189, 5, 5);
 }
 
+#attack:disabled {
+  background-color: gray;
+}
+
 #berry {
   background-color: rgb(17, 20, 165);
+}
+
+#berry:disabled {
+  background-color: gray;
 }
 
 #again {

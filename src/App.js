@@ -79,6 +79,8 @@ function App() {
 
   const playAudio = () => {
     const audio = document.querySelector("audio");
+    audio.volume = 0.4;
+    audio.loop = true;
 
     if (audio.paused) {
       audio.play();
@@ -93,6 +95,9 @@ function App() {
       <h1 className="title">Let's Go Pokemon Battle!</h1>
       <audio>
         <source src={music}></source>
+      </audio>
+      <audio id="action-sound">
+        <source></source>
       </audio>
       {pokemon && randomPokemon ? (
         <section className="gameplay">

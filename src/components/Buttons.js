@@ -1,4 +1,6 @@
 import React from "react";
+import attackSound from "../sounds/attack.mp3";
+import berrySound from "../sounds/berry.mp3";
 
 function Buttons({ pokemon, randomPokemon }) {
   const [myHealthBar, setMyHealthBar] = React.useState(pokemon.hp);
@@ -12,7 +14,8 @@ function Buttons({ pokemon, randomPokemon }) {
     setMyHealthBar(myHealthBar - vsDamage);
     setPokemonName(randomPokemon.name);
     setPokemonAttack(randomPokemon.move);
-    setDisable(false);
+    setTimeout(() => setDisable(false), 1500);
+    playAudio(attackSound);
   };
 
   const handleAttackClick = () => {
@@ -22,15 +25,24 @@ function Buttons({ pokemon, randomPokemon }) {
     setPokemonAttack(pokemon.move);
     setDisable(true);
     setTimeout(enemyAttack, 1500);
+    playAudio(attackSound);
   };
 
   const eatBerry = () => {
-    const berry = Math.ceil(Math.random() * 10);
+    const berry = Math.ceil(Math.random() * 15);
     setMyHealthBar(myHealthBar + berry);
     setPokemonName(pokemon.name);
     setPokemonAttack("miracle berry");
     setDisable(true);
     setTimeout(enemyAttack, 1500);
+    playAudio(berrySound);
+  };
+
+  const playAudio = (selectedSound) => {
+    const sound = document.querySelector("#action-sound");
+    if (!sound) return;
+    sound.src = selectedSound;
+    sound.play();
   };
 
   return (
