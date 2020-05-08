@@ -29,7 +29,7 @@ function Buttons({ pokemon, randomPokemon }) {
   };
 
   const eatBerry = () => {
-    const berry = Math.ceil(Math.random() * 10);
+    const berry = Math.ceil(Math.random() * 15);
     setMyHealthBar(myHealthBar + berry);
     setPokemonName(pokemon.name);
     setPokemonAttack("miracle berry");
@@ -41,13 +41,8 @@ function Buttons({ pokemon, randomPokemon }) {
   const playAudio = (selectedSound) => {
     const sound = document.querySelector("#action-sound");
     if (!sound) return;
-    if (sound.paused) {
-      sound.src = selectedSound;
-      sound.play();
-    } else if (sound.play) {
-      sound.pause();
-      sound.currentTime = 0;
-    }
+    sound.src = selectedSound;
+    sound.play();
   };
 
   return (
@@ -81,9 +76,6 @@ function Buttons({ pokemon, randomPokemon }) {
         <h3>Game over! </h3>
       ) : (
         <div className="button-box">
-          <audio id="action-sound">
-            <source></source>
-          </audio>
           <button
             className="actionBtn"
             id="attack"
