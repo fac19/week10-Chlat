@@ -79,6 +79,7 @@ function App() {
 
   const playAudio = () => {
     const audio = document.querySelector("audio");
+    audio.volume = 0.4;
 
     if (audio.paused) {
       audio.play();

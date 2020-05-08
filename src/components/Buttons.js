@@ -1,4 +1,6 @@
 import React from "react";
+import attackSound from "../sounds/attack.mp3";
+import berrySound from "../sounds/berry.mp3";
 
 function Buttons({ pokemon, randomPokemon }) {
   const [myHealthBar, setMyHealthBar] = React.useState(pokemon.hp);
@@ -12,7 +14,8 @@ function Buttons({ pokemon, randomPokemon }) {
     setMyHealthBar(myHealthBar - vsDamage);
     setPokemonName(randomPokemon.name);
     setPokemonAttack(randomPokemon.move);
-    setDisable(false);
+    setTimeout(() => setDisable(false), 1500);
+    playAudio(attackSound);
   };
 
   const handleAttackClick = () => {
@@ -22,6 +25,7 @@ function Buttons({ pokemon, randomPokemon }) {
     setPokemonAttack(pokemon.move);
     setDisable(true);
     setTimeout(enemyAttack, 1500);
+    playAudio(attackSound);
   };
 
   const eatBerry = () => {
@@ -31,6 +35,19 @@ function Buttons({ pokemon, randomPokemon }) {
     setPokemonAttack("miracle berry");
     setDisable(true);
     setTimeout(enemyAttack, 1500);
+    playAudio(berrySound);
+  };
+
+  const playAudio = (selectedSound) => {
+    const sound = document.querySelector("#action-sound");
+    if (!sound) return;
+    if (sound.paused) {
+      sound.src = selectedSound;
+      sound.play();
+    } else if (sound.play) {
+      sound.pause();
+      sound.currentTime = 0;
+    }
   };
 
   return (
@@ -64,6 +81,9 @@ function Buttons({ pokemon, randomPokemon }) {
         <h3>Game over! </h3>
       ) : (
         <div className="button-box">
+          <audio id="action-sound">
+            <source></source>
+          </audio>
           <button
             className="actionBtn"
             id="attack"
