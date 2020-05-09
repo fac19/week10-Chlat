@@ -1,4 +1,5 @@
 import React from "react";
+import SFXSound from "./SFXSound";
 import attackSound from "../sounds/attack.mp3";
 import berrySound from "../sounds/berry.mp3";
 
@@ -8,6 +9,7 @@ function Buttons({ pokemon, randomPokemon }) {
   const [pokemonName, setPokemonName] = React.useState("");
   const [pokemonAttack, setPokemonAttack] = React.useState("");
   const [disable, setDisable] = React.useState(false);
+  const [sfx, setSFX] = React.useState("");
 
   const enemyAttack = () => {
     const vsDamage = Math.ceil(Math.random() * 10);
@@ -19,7 +21,7 @@ function Buttons({ pokemon, randomPokemon }) {
       ]
     );
     setTimeout(() => setDisable(false), 1500);
-    playSound(attackSound);
+    setSFX(attackSound);
   };
 
   const handleAttackClick = () => {
@@ -31,7 +33,7 @@ function Buttons({ pokemon, randomPokemon }) {
     );
     setDisable(true);
     setTimeout(enemyAttack, 1500);
-    playSound(attackSound);
+    setSFX(attackSound);
   };
 
   const eatBerry = () => {
@@ -41,14 +43,9 @@ function Buttons({ pokemon, randomPokemon }) {
     setPokemonAttack("miracle berry");
     setDisable(true);
     setTimeout(enemyAttack, 1500);
-    playSound(berrySound);
-  };
+    setSFX(berrySound);
 
-  const playSound = (selectedSound) => {
-    const sound = document.querySelector("#action-sound");
-    if (!sound) return;
-    sound.src = selectedSound;
-    sound.play();
+    // return <SFXSound src={berrySound} />;
   };
 
   return (
@@ -82,12 +79,15 @@ function Buttons({ pokemon, randomPokemon }) {
         <h3>Game over! </h3>
       ) : (
         <div className="button-box">
+          <SFXSound src={sfx} />
+
           <button
             className="actionBtn"
             id="attack"
             disabled={disable}
             onClick={handleAttackClick}
           >
+            {/* <SFXSound src={attackSound} /> */}
             Use Attack
           </button>
           <button
@@ -96,6 +96,7 @@ function Buttons({ pokemon, randomPokemon }) {
             disabled={disable}
             onClick={eatBerry}
           >
+            {/* <SFXSound src={berrySound} /> */}
             Eat A Berry
           </button>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import getPokemonData from "../utils/getPokemonData";
-import playAudio from "../utils/playAudio";
+// import playAudio from "../utils/playAudio";
 
 const StartGameForm = (props) => {
   // function that generates opponent's pokemon
@@ -21,7 +21,6 @@ const StartGameForm = (props) => {
       hp: data.stats["5"].base_stat,
       move: data.moves.map((move) => move.move["name"]),
     };
-    console.log(PokeData);
     return PokeData;
   };
 
@@ -37,7 +36,7 @@ const StartGameForm = (props) => {
         props.setPokemon(PokeData);
         props.setErrorMessage("");
       })
-      .then(playAudio)
+      // .then(playAudio)
       //.catch(console.error);
       .catch(() => {
         props.setErrorMessage("That's Not A Pokemon!");
@@ -55,7 +54,7 @@ const StartGameForm = (props) => {
         props.setPokemon(PokeData);
         props.setErrorMessage("");
       })
-      .then(playAudio)
+      // .then(playAudio)
 
       .catch(console.error);
   };
@@ -73,7 +72,9 @@ const StartGameForm = (props) => {
               id="pokemon-name"
               placeholder="Choose a pokemon"
               value={props.input}
-              onChange={(event) => props.setInput(event.target.value)}
+              onChange={(event) =>
+                props.setInput(event.target.value.toLowerCase())
+              }
             ></input>
           </label>
           <button className="actionBtn" id="choose" type="submit">

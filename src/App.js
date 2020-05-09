@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import Game from "./components/Game";
 import StartGameForm from "./components/StartGameForm";
-import music from "./sounds/Pokemon-BattleMusic.mp3";
 
 function App() {
   // form input
@@ -16,12 +15,7 @@ function App() {
   return (
     <main>
       <h1 className="title">Let's Go Pokemon Battle!</h1>
-      <audio>
-        <source src={music}></source>
-      </audio>
-      <audio id="action-sound">
-        <source></source>
-      </audio>
+
       {pokemon && randomPokemon ? (
         <Game
           pokemon={pokemon}

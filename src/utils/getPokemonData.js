@@ -13,3 +13,8 @@ const getPokemonData = (input) => {
 };
 
 export default getPokemonData;
+
+// Get Pokemon type damage data
+// fetch(`https://pokeapi.co/api/v2/type/poison`)
+//   .then((res) => res.json())
+//   .then((data) => console.log(data.damage_relations));
