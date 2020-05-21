@@ -8,11 +8,13 @@ function Buttons({ pokemon, randomPokemon }) {
   const [pokemonName, setPokemonName] = React.useState("");
   const [pokemonAttack, setPokemonAttack] = React.useState("");
   const [disable, setDisable] = React.useState(false);
+  const [berryCount, setBerryCount] = React.useState(1);
 
   const enemyAttack = () => {
     const vsDamage = Math.ceil(Math.random() * 10);
     setMyHealthBar(myHealthBar - vsDamage);
-    setPokemonName(randomPokemon.name);
+    console.log(myHealthBar);
+    setPokemonName(randomPokemon.name + " used ");
     setPokemonAttack(
       randomPokemon.move[
         Math.floor(Math.random() * randomPokemon.move.length - 1)
@@ -25,7 +27,9 @@ function Buttons({ pokemon, randomPokemon }) {
   const handleAttackClick = () => {
     const damage = Math.ceil(Math.random() * 10);
     setVsHealthBar(vsHealthBar - damage);
-    setPokemonName(pokemon.name);
+    setPokemonName(pokemon.name + " used ");
+    console.log(myHealthBar);
+
     setPokemonAttack(
       pokemon.move[Math.floor(Math.random() * randomPokemon.move.length - 1)]
     );
@@ -35,13 +39,19 @@ function Buttons({ pokemon, randomPokemon }) {
   };
 
   const eatBerry = () => {
-    const berry = Math.ceil(Math.random() * 15);
-    setMyHealthBar(myHealthBar + berry);
-    setPokemonName(pokemon.name);
-    setPokemonAttack("miracle berry");
-    setDisable(true);
-    setTimeout(enemyAttack, 1500);
-    playSound(berrySound);
+    if (berryCount <= 3) {
+      setMyHealthBar(myHealthBar + 20);
+      setPokemonName(pokemon.name + " used ");
+      setPokemonAttack("miracle berry");
+      setDisable(true);
+      setTimeout(enemyAttack, 1500);
+      playSound(berrySound);
+      setBerryCount(berryCount + 1);
+      console.log(myHealthBar);
+    } else {
+      setPokemonName(pokemon.name + " is ");
+      setPokemonAttack(" out of berries!");
+    }
   };
 
   const playSound = (selectedSound) => {
@@ -70,7 +80,7 @@ function Buttons({ pokemon, randomPokemon }) {
 
       {pokemonAttack ? (
         <p className="fight">
-          {pokemonName} used{" "}
+          {pokemonName}
           <span style={{ color: "rgb(247, 237, 32)" }}>{pokemonAttack}</span>!
         </p>
       ) : (
