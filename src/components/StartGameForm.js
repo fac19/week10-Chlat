@@ -21,7 +21,7 @@ const StartGameForm = (props) => {
       hp: data.stats["5"].base_stat,
       move: data.moves.map((move) => move.move["name"]),
     };
-    console.log(PokeData);
+    // console.log(PokeData);
     return PokeData;
   };
 

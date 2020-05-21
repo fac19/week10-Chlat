@@ -10,48 +10,52 @@ function Buttons({ pokemon, randomPokemon }) {
   const [disable, setDisable] = React.useState(false);
   const [berryCount, setBerryCount] = React.useState(1);
 
+  const eatBerry = () => {
+    if (berryCount <= 3) {
+      setPokemonName(pokemon.name + " used ");
+      setPokemonAttack("miracle berry");
+      setDisable(true);
+      playSound(berrySound);
+      setBerryCount(berryCount + 1);
+      setMyHealthBar(myHealthBar + 20);
+    } else {
+      setPokemonName("Oh no! " + pokemon.name + " is ");
+      setPokemonAttack(" out of berries");
+    }
+    setTimeout(enemyAttack, 1500);
+  };
+
   const enemyAttack = () => {
-    const vsDamage = Math.ceil(Math.random() * 10);
-    setMyHealthBar(myHealthBar - vsDamage);
-    console.log(myHealthBar);
-    setPokemonName(randomPokemon.name + " used ");
-    setPokemonAttack(
-      randomPokemon.move[
-        Math.floor(Math.random() * randomPokemon.move.length - 1)
-      ]
-    );
-    setTimeout(() => setDisable(false), 1500);
-    playSound(attackSound);
+    if (vsHealthBar <= 7) {
+      setVsHealthBar(vsHealthBar + 20);
+      setPokemonName(randomPokemon.name + " used ");
+      setPokemonAttack("miracle berry");
+      playSound(berrySound);
+      setTimeout(() => setDisable(false), 1500);
+    } else {
+      const vsDamage = Math.ceil(Math.random() * 10);
+      setMyHealthBar((prevState) => prevState - vsDamage);
+      setPokemonName(randomPokemon.name + " used ");
+      setPokemonAttack(
+        randomPokemon.move[
+          Math.floor(Math.random() * randomPokemon.move.length - 1)
+        ]
+      );
+      setTimeout(() => setDisable(false), 1500);
+      playSound(attackSound);
+    }
   };
 
   const handleAttackClick = () => {
     const damage = Math.ceil(Math.random() * 10);
     setVsHealthBar(vsHealthBar - damage);
     setPokemonName(pokemon.name + " used ");
-    console.log(myHealthBar);
-
     setPokemonAttack(
       pokemon.move[Math.floor(Math.random() * randomPokemon.move.length - 1)]
     );
     setDisable(true);
     setTimeout(enemyAttack, 1500);
     playSound(attackSound);
-  };
-
-  const eatBerry = () => {
-    if (berryCount <= 3) {
-      setMyHealthBar(myHealthBar + 20);
-      setPokemonName(pokemon.name + " used ");
-      setPokemonAttack("miracle berry");
-      setDisable(true);
-      setTimeout(enemyAttack, 1500);
-      playSound(berrySound);
-      setBerryCount(berryCount + 1);
-      console.log(myHealthBar);
-    } else {
-      setPokemonName(pokemon.name + " is ");
-      setPokemonAttack(" out of berries!");
-    }
   };
 
   const playSound = (selectedSound) => {
