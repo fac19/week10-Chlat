@@ -54,7 +54,6 @@ function Buttons({ pokemon, randomPokemon }) {
   return (
     <div>
       <div className="health-bars">
-        {" "}
         <p data-testid="my-health">
           My Health:
           <span style={{ color: "rgb(0, 138, 4)" }}>
