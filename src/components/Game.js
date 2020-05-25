@@ -3,7 +3,6 @@ import playAudio from "../utils/playAudio";
 import React from "react";
 import DisplayPokemon from "./DisplayPokemon";
 import Buttons from "./Buttons";
-import getMovesData from "../utils/getMovesData";
 
 const GamePlay = ({ pokemon, setPokemon, randomPokemon, setRandomPokemon }) => {
   // handles play again

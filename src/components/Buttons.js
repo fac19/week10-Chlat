@@ -1,6 +1,7 @@
 import React from "react";
 import attackSound from "../sounds/attack.mp3";
 import berrySound from "../sounds/berry.mp3";
+import getMovesData from "../utils/getMovesData";
 
 function Buttons({ pokemon, randomPokemon }) {
   const [myHealthBar, setMyHealthBar] = React.useState(pokemon.hp);
@@ -37,7 +38,7 @@ function Buttons({ pokemon, randomPokemon }) {
       setMyHealthBar((prevState) => prevState - vsDamage);
       setPokemonName(randomPokemon.name + " used ");
       setPokemonAttack(
-        randomPokemon.move[
+        randomPokemon.moves[
           Math.floor(Math.random() * randomPokemon.move.length - 1)
         ]
       );
@@ -51,7 +52,7 @@ function Buttons({ pokemon, randomPokemon }) {
     setVsHealthBar(vsHealthBar - damage);
     setPokemonName(pokemon.name + " used ");
     setPokemonAttack(
-      pokemon.move[Math.floor(Math.random() * randomPokemon.move.length - 1)]
+      pokemon.moves[Math.floor(Math.random() * randomPokemon.move.length - 1)]
     );
     setDisable(true);
     setTimeout(enemyAttack, 1500);

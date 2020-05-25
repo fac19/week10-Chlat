@@ -1,6 +1,7 @@
 import React from "react";
 import getPokemonData from "../utils/getPokemonData";
 import playAudio from "../utils/playAudio";
+import getMovesData from "../utils/getMovesData";
 
 const StartGameForm = (props) => {
   // function that generates opponent's pokemon
@@ -19,14 +20,14 @@ const StartGameForm = (props) => {
       name: data.name,
       image: data.sprites.front_default,
       hp: data.stats["5"].base_stat,
-      moves: data.moves.map((move) => move.move["name"]),
-      move1:
+      moves: [
         data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
-      move2:
         data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
-      move3:
         data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
+      ],
     };
+
+    console.log(PokeData.moves);
     console.log(PokeData);
     return PokeData;
   };
@@ -60,9 +61,9 @@ const StartGameForm = (props) => {
       .then((PokeData) => {
         props.setPokemon(PokeData);
         props.setErrorMessage("");
+        PokeData.moves.forEach((move) => getMovesData(move));
       })
       .then(playAudio)
-
       .catch(console.error);
   };
 
