@@ -17,14 +17,6 @@ function MovesButtons({
     getVsMoves();
   }, []);
 
-  //   const mymoves = async () => {
-  //     pokemon.moves.map((move) =>
-  //       getMovesData(move)
-  //         .then(createMovesData)
-  //         .then((...moves) => setMyMoves(...moves))
-  //     );
-  //   };
-
   async function getMyMoves() {
     let moveData = await Promise.all(
       pokemon.moves.map(async (move) => {
@@ -37,16 +29,21 @@ function MovesButtons({
   }
 
   async function getVsMoves() {
-    let moveData = await Promise.all(
+    let vsData = await Promise.all(
       randomPokemon.moves.map(async (move) => {
-        let moveResponse = await getMovesData(move);
-        return moveResponse;
+        let vsResponse = await getMovesData(move);
+        return vsResponse;
         // console.log(moveResponse);
       })
     );
-    setVsMoves([...vsMoves, moveData]);
+    setVsMoves([...vsMoves, vsData]);
   }
-  console.log(myMoves[0]);
+
+  console.log(myMoves);
+
+  console.log(myMoves.length);
+  console.log(typeof vsMoves);
+
   // randomPokemon.moves.map((move) =>
   //   getMovesData(move).then(createMovesData)
 
@@ -65,7 +62,7 @@ function MovesButtons({
 
   return (
     <>
-      <button className="actionBtn"></button>
+      <button className="actionBtn">{}</button>
       <button className="actionBtn"></button>
       <button className="actionBtn"></button>
     </>
