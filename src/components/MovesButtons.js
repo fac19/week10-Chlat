@@ -14,7 +14,11 @@ function MovesButtons({
     move2: "",
     move3: "",
   });
-  const [vsMoves, setVsMoves] = React.useState([]);
+  const [vsMoves, setVsMoves] = React.useState({
+    move1: "",
+    move2: "",
+    move3: "",
+  });
 
   React.useEffect(() => {
     getMyMoves();
@@ -36,6 +40,22 @@ function MovesButtons({
     return moveData;
   }
 
+  async function getVsMoves() {
+    let num = 1;
+    let vsmoveData = await Promise.all(
+      randomPokemon.moves.map(async (move) => {
+        let moveResponse = await getMovesData(move);
+        setVsMoves((prevState) => ({
+          ...prevState,
+          ["move" + num]: moveResponse,
+        }));
+        num++;
+      })
+    );
+    return vsmoveData;
+  }
+
+  console.log(vsMoves);
   console.log(myMoves.move1);
   console.log(myMoves.move1.power);
   // async function getMyMoves() {
@@ -51,22 +71,6 @@ function MovesButtons({
   //   return moveData;
   // }
   // console.log(myMoves);
-
-  async function getVsMoves() {
-    let vsData = await Promise.all(
-      randomPokemon.moves.map(async (move) => {
-        let vsResponse = await getMovesData(move);
-        return vsResponse;
-        // console.log(moveResponse);
-      })
-    );
-    setVsMoves([...vsMoves, vsData]);
-  }
-
-  console.log(myMoves);
-
-  console.log(myMoves.length);
-  console.log(typeof vsMoves);
 
   // randomPokemon.moves.map((move) =>
   //   getMovesData(move).then(createMovesData)
@@ -86,11 +90,9 @@ function MovesButtons({
 
   return (
     <>
-      <button className="actionBtn" onClick={)}>
-        {myMoves.move1.moveName}
-      </button>
       <button className="actionBtn">{myMoves.move1.moveName}</button>
-      <button className="actionBtn">{myMoves.move1.moveName}</button>
+      <button className="actionBtn">{myMoves.move2.moveName}</button>
+      <button className="actionBtn">{myMoves.move3.moveName}</button>
     </>
   );
 }
