@@ -9,7 +9,11 @@ function MovesButtons({
   damage,
   SetDamage,
 }) {
-  const [myMoves, setMyMoves] = React.useState([]);
+  const [myMoves, setMyMoves] = React.useState({
+    move1: "",
+    move2: "",
+    move3: "",
+  });
   const [vsMoves, setVsMoves] = React.useState([]);
 
   React.useEffect(() => {
@@ -18,15 +22,35 @@ function MovesButtons({
   }, []);
 
   async function getMyMoves() {
+    let num = 1;
     let moveData = await Promise.all(
       pokemon.moves.map(async (move) => {
         let moveResponse = await getMovesData(move);
-        return moveResponse;
-        // console.log(moveResponse);
+        setMyMoves((prevState) => ({
+          ...prevState,
+          ["move" + num]: moveResponse,
+        }));
+        num++;
       })
     );
-    setMyMoves([...myMoves, moveData]);
+    return moveData;
   }
+
+  console.log(myMoves.move1);
+  console.log(myMoves.move1.power);
+  // async function getMyMoves() {
+  //   let num = 1;
+  //   let moveData = await Promise.all(
+  //     pokemon.moves.map(async (move) => {
+  //       let moveResponse = await getMovesData(move);
+  //       setMyMoves({ ...myMoves, ["move" + num]: moveResponse });
+  //       num++;
+  //       console.log(num);
+  //     })
+  //   );
+  //   return moveData;
+  // }
+  // console.log(myMoves);
 
   async function getVsMoves() {
     let vsData = await Promise.all(
@@ -62,9 +86,11 @@ function MovesButtons({
 
   return (
     <>
-      <button className="actionBtn">{}</button>
-      <button className="actionBtn"></button>
-      <button className="actionBtn"></button>
+      <button className="actionBtn" onClick={)}>
+        {myMoves.move1.moveName}
+      </button>
+      <button className="actionBtn">{myMoves.move1.moveName}</button>
+      <button className="actionBtn">{myMoves.move1.moveName}</button>
     </>
   );
 }
