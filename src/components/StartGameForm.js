@@ -1,7 +1,6 @@
 import React from "react";
 import getPokemonData from "../utils/getPokemonData";
 import playAudio from "../utils/playAudio";
-import getMovesData from "../utils/getMovesData";
 
 const StartGameForm = (props) => {
   // function that generates opponent's pokemon
@@ -27,7 +26,6 @@ const StartGameForm = (props) => {
       ],
     };
 
-    console.log(PokeData.moves);
     console.log(PokeData);
     return PokeData;
   };
@@ -61,7 +59,6 @@ const StartGameForm = (props) => {
       .then((PokeData) => {
         props.setPokemon(PokeData);
         props.setErrorMessage("");
-        PokeData.moves.forEach((move) => getMovesData(move));
       })
       .then(playAudio)
       .catch(console.error);

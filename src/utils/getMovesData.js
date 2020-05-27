@@ -9,16 +9,15 @@ const checkResponse = (response) => {
 const getMovesData = (props) => {
   return fetch(`https://pokeapi.co/api/v2/move/${props}`)
     .then(checkResponse)
-    .then((res) => {
-      if (!res.power) res.power = 10;
+    .then((data) => {
+      if (!data.power) data.power = 10;
 
       const MovesData = {
-        moveName: res.name,
-        type: res.damage_class.name,
-        power: res.power / 5,
-        pp: res.pp,
+        moveName: data.name,
+        type: data.damage_class.name,
+        power: data.power > 30 ? data.power / 5 : data.power,
       };
-      console.log(MovesData);
+      return MovesData;
     });
 };
 

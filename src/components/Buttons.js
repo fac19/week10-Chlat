@@ -1,13 +1,14 @@
 import React from "react";
 import attackSound from "../sounds/attack.mp3";
 import berrySound from "../sounds/berry.mp3";
-import getMovesData from "../utils/getMovesData";
+import MovesButtons from "./MovesButtons";
 
 function Buttons({ pokemon, randomPokemon }) {
   const [myHealthBar, setMyHealthBar] = React.useState(pokemon.hp);
   const [vsHealthBar, setVsHealthBar] = React.useState(randomPokemon.hp);
   const [pokemonName, setPokemonName] = React.useState("");
   const [pokemonAttack, setPokemonAttack] = React.useState("");
+  const [damage, setDamage] = React.useState(0);
   const [disable, setDisable] = React.useState(false);
   const [berryCount, setBerryCount] = React.useState(1);
 
@@ -96,6 +97,14 @@ function Buttons({ pokemon, randomPokemon }) {
         <h3>Game over! </h3>
       ) : (
         <div className="button-box">
+          <MovesButtons
+            pokemon={pokemon}
+            randomPokemon={randomPokemon}
+            pokemonAttack={pokemonAttack}
+            setPokemonAttack={setPokemonAttack}
+            damage={damage}
+            setDamage={setDamage}
+          />
           <button
             className="actionBtn"
             id="attack"
