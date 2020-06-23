@@ -89,11 +89,11 @@ function MovesButtons({
   //   }
 
   return (
-    <>
-      <button className="actionBtn">{myMoves.move1.moveName}</button>
-      <button className="actionBtn">{myMoves.move2.moveName}</button>
-      <button className="actionBtn">{myMoves.move3.moveName}</button>
-    </>
+    <div className="movesBtnBox">
+      <button className="movesBtn">{myMoves.move1.moveName}</button>
+      <button className="movesBtn">{myMoves.move2.moveName}</button>
+      <button className="movesBtn">{myMoves.move3.moveName}</button>
+    </div>
   );
 }
 
