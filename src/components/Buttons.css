@@ -1,3 +1,8 @@
+section {
+    font-family: 'Press Start 2P',
+        cursive;
+}
+
 button {
     font-family: 'Gudea', sans-serif;
     cursor: pointer;

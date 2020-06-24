@@ -1,5 +1,5 @@
 import React from "react";
-// import getMovesData from "../utils/getMovesData";
+import getMovesData from "../utils/getMovesData";
 import attackSound from "../sounds/attack.mp3";
 import berrySound from "../sounds/berry.mp3";
 import playSound from "../utils/playSFX";
@@ -14,6 +14,51 @@ function Buttons({ pokemon, randomPokemon }) {
   const [berryCount, setBerryCount] = React.useState(1);
   const [showMoves, setShowMoves] = React.useState(false);
   const [damage, setDamage] = React.useState(0);
+  const [myMoves, setMyMoves] = React.useState({
+    move1: "",
+    move2: "",
+    move3: "",
+  });
+  const [vsMoves, setVsMoves] = React.useState({
+    move1: "",
+    move2: "",
+    move3: "",
+  });
+
+  React.useEffect(() => {
+    getMyMoves(pokemon);
+    getVsMoves(randomPokemon);
+  }, [getMovesData]);
+
+  function getMyMoves(pokemon) {
+    let num = 1;
+    let moveData = Promise.all(
+      pokemon.moves.map(async (move) => {
+        let moveResponse = await getMovesData(move);
+        setMyMoves((prevState) => ({
+          ...prevState,
+          ["move" + num]: moveResponse,
+        }));
+        num++;
+      })
+    );
+    return moveData;
+  }
+
+  function getVsMoves(randomPokemon) {
+    let num = 1;
+    let vsmoveData = Promise.all(
+      randomPokemon.moves.map(async (move) => {
+        let moveResponse = await getMovesData(move);
+        setVsMoves((prevState) => ({
+          ...prevState,
+          ["move" + num]: moveResponse,
+        }));
+        num++;
+      })
+    );
+    return vsmoveData;
+  }
 
   const eatBerry = () => {
     if (berryCount <= 3) {
@@ -48,7 +93,7 @@ function Buttons({ pokemon, randomPokemon }) {
   };
 
   return (
-    <div>
+    <section>
       <div className="health-bars">
         <p data-testid="my-health">
           My Health:
@@ -88,6 +133,7 @@ function Buttons({ pokemon, randomPokemon }) {
               setDisable={setDisable}
               damage={damage}
               setDamage={setDamage}
+              myMoves={myMoves}
             />
           ) : null}
           <button
@@ -108,7 +154,7 @@ function Buttons({ pokemon, randomPokemon }) {
           </button>
         </div>
       )}
-    </div>
+    </section>
   );
 }
 
