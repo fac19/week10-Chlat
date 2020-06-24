@@ -11,7 +11,7 @@ const StartGameForm = (props) => {
       .then(createPokeData)
       .then((PokeData) => props.setRandomPokemon(PokeData))
       .catch(console.error);
-  }, [props.pokemon]);
+  }, [props]);
 
   // creates object with pokemon data
   const createPokeData = (data) => {

@@ -1,16 +1,85 @@
 import React from "react";
+import getMovesData from "../utils/getMovesData";
+
 import attackSound from "../sounds/attack.mp3";
 import berrySound from "../sounds/berry.mp3";
-import MovesButtons from "./MovesButtons";
+import playSound from "../utils/playSFX";
 
 function Buttons({ pokemon, randomPokemon }) {
   const [myHealthBar, setMyHealthBar] = React.useState(pokemon.hp);
   const [vsHealthBar, setVsHealthBar] = React.useState(randomPokemon.hp);
   const [pokemonName, setPokemonName] = React.useState("");
   const [pokemonAttack, setPokemonAttack] = React.useState("");
-  const [damage, setDamage] = React.useState(0);
   const [disable, setDisable] = React.useState(false);
   const [berryCount, setBerryCount] = React.useState(1);
+  const [showMoves, setShowMoves] = React.useState(false);
+  const [damage, setDamage] = React.useState(0);
+
+  const MovesButtons = () => {
+    const [myMoves, setMyMoves] = React.useState({
+      move1: "",
+      move2: "",
+      move3: "",
+    });
+    const [vsMoves, setVsMoves] = React.useState({
+      move1: "",
+      move2: "",
+      move3: "",
+    });
+
+    React.useEffect(() => {
+      getMyMoves();
+      getVsMoves();
+    }, []);
+
+    async function getMyMoves() {
+      let num = 1;
+      let moveData = await Promise.all(
+        pokemon.moves.map(async (move) => {
+          let moveResponse = await getMovesData(move);
+          setMyMoves((prevState) => ({
+            ...prevState,
+            ["move" + num]: moveResponse,
+          }));
+          num++;
+        })
+      );
+      return moveData;
+    }
+
+    async function getVsMoves() {
+      let num = 1;
+      let vsmoveData = await Promise.all(
+        randomPokemon.moves.map(async (move) => {
+          let moveResponse = await getMovesData(move);
+          setVsMoves((prevState) => ({
+            ...prevState,
+            ["move" + num]: moveResponse,
+          }));
+          num++;
+        })
+      );
+      return vsmoveData;
+    }
+
+    console.log(vsMoves);
+    console.log(myMoves.move1);
+    console.log(myMoves.move1.power);
+
+    return (
+      <div className="movesBtnBox">
+        <button className="movesBtn" onClick={handleAttack(myMoves.move1)}>
+          {myMoves.move1.moveName}
+        </button>
+        <button className="movesBtn" onClick={handleAttack(myMoves.move2)}>
+          {myMoves.move2.moveName}
+        </button>
+        <button className="movesBtn" onClick={handleAttack(myMoves.move3)}>
+          {myMoves.move3.moveName}
+        </button>
+      </div>
+    );
+  };
 
   const eatBerry = () => {
     if (berryCount <= 3) {
@@ -38,33 +107,20 @@ function Buttons({ pokemon, randomPokemon }) {
       const vsDamage = Math.ceil(Math.random() * 10);
       setMyHealthBar((prevState) => prevState - vsDamage);
       setPokemonName(randomPokemon.name + " used ");
-      setPokemonAttack(
-        randomPokemon.moves[
-          Math.floor(Math.random() * randomPokemon.move.length - 1)
-        ]
-      );
+      setPokemonAttack(randomPokemon.moves[Math.floor(Math.random() * 2)]);
       setTimeout(() => setDisable(false), 1500);
       playSound(attackSound);
     }
   };
 
-  const handleAttackClick = () => {
-    const damage = Math.ceil(Math.random() * 10);
-    setVsHealthBar(vsHealthBar - damage);
+  const handleAttack = (move) => {
+    setPokemonAttack(move.moveName);
+    setDamage(move.power);
     setPokemonName(pokemon.name + " used ");
-    setPokemonAttack(
-      pokemon.moves[Math.floor(Math.random() * randomPokemon.move.length - 1)]
-    );
+    setVsHealthBar(vsHealthBar - damage);
     setDisable(true);
     setTimeout(enemyAttack, 1500);
     playSound(attackSound);
-  };
-
-  const playSound = (selectedSound) => {
-    const sound = document.querySelector("#action-sound");
-    if (!sound) return;
-    sound.src = selectedSound;
-    sound.play();
   };
 
   return (
@@ -97,19 +153,22 @@ function Buttons({ pokemon, randomPokemon }) {
         <h3>Game over! </h3>
       ) : (
         <div className="button-box">
-          <MovesButtons
-            pokemon={pokemon}
-            randomPokemon={randomPokemon}
-            pokemonAttack={pokemonAttack}
-            setPokemonAttack={setPokemonAttack}
-            damage={damage}
-            setDamage={setDamage}
-          />
+          {showMoves ? (
+            <MovesButtons
+              pokemon={pokemon}
+              randomPokemon={randomPokemon}
+              setPokemonName={setPokemonName}
+              setPokemonAttack={setPokemonAttack}
+              vsHealthBar={vsHealthBar}
+              setVsHealthBar={setVsHealthBar}
+              setDisable={setDisable}
+            />
+          ) : null}
           <button
             className="actionBtn"
             id="attack"
             disabled={disable}
-            onClick={handleAttackClick}
+            onClick={() => setShowMoves(true)}
           >
             Use Attack
           </button>
