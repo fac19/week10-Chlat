@@ -3,16 +3,7 @@ import getMovesData from "../utils/getMovesData";
 import playSound from "../utils/playSFX";
 import attackSound from "../sounds/attack.mp3";
 
-function MovesButtons({
-  pokemon,
-  randomPokemon,
-  setPokemonName,
-  setPokemonAttack,
-  setDisable,
-  vsHealthBar,
-  setVsHealthBar,
-  enemyAttack,
-}) {
+function MovesButtons(props) {
   const [myMoves, setMyMoves] = React.useState({
     move1: "",
     move2: "",
@@ -24,17 +15,15 @@ function MovesButtons({
     move3: "",
   });
 
-  const [damage, setDamage] = React.useState(0);
-
   React.useEffect(() => {
-    getMyMoves();
-    getVsMoves();
-  }, []);
+    getMyMoves(props);
+    getVsMoves(props);
+  }, [vsMoves]);
 
-  async function getMyMoves() {
+  async function getMyMoves(props) {
     let num = 1;
     let moveData = await Promise.all(
-      pokemon.moves.map(async (move) => {
+      props.pokemon.moves.map(async (move) => {
         let moveResponse = await getMovesData(move);
         setMyMoves((prevState) => ({
           ...prevState,
@@ -46,10 +35,10 @@ function MovesButtons({
     return moveData;
   }
 
-  async function getVsMoves() {
+  async function getVsMoves(props) {
     let num = 1;
     let vsmoveData = await Promise.all(
-      randomPokemon.moves.map(async (move) => {
+      props.randomPokemon.moves.map(async (move) => {
         let moveResponse = await getMovesData(move);
         setVsMoves((prevState) => ({
           ...prevState,
@@ -66,11 +55,11 @@ function MovesButtons({
   console.log(myMoves.move1.power);
 
   const handleAttack = (move) => {
-    setPokemonAttack(move.moveName);
-    setDamage(move.power);
-    setPokemonName(pokemon.name + " used ");
-    setVsHealthBar(vsHealthBar - damage);
-    setDisable(true);
+    props.setPokemonAttack(move.moveName);
+    props.setDamage(move.power);
+    props.setPokemonName(props.pokemon.name + " used ");
+    props.setVsHealthBar(props.vsHealthBar - props.damage);
+    props.setDisable(true);
     // setTimeout(enemyAttack, 1500);
     playSound(attackSound);
   };

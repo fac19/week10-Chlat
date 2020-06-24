@@ -7,17 +7,7 @@ body {
 
 main {
   text-align: center;
-  font-family: 'Press Start 2P', cursive;
   margin-top: 0;
-}
-
-button {
-  font-family: 'Gudea', sans-serif;
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: default;
 }
 
 .title {
@@ -26,6 +16,9 @@ button:disabled {
   text-align: center;
   text-shadow: 4px 5px rgb(9, 12, 163);
   color: yellow;
+  font-family: 'Press Start 2P',
+    cursive;
+
 }
 
 .alert {

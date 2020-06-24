@@ -1,3 +1,13 @@
+button {
+    font-family: 'Gudea', sans-serif;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+
 .health-bars p {
     display: inline;
     margin: 4rem

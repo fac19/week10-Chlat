@@ -5,12 +5,8 @@ import "./components/MovesButtons.css";
 import Game from "./components/Game";
 import StartGameForm from "./components/StartGameForm";
 import music from "./sounds/Pokemon-BattleMusic.mp3";
-import updateState from "./Context/updateState";
-import initialState from "./Context/initialState";
-import MyContext from "./Context/context";
 
 function App() {
-  const [state, dispatch] = React.useReducer(updateState, initialState);
   // form input
   const [input, setInput] = React.useState("");
   // pokemon data
@@ -20,14 +16,12 @@ function App() {
   const [errorMessage, setErrorMessage] = React.useState("");
 
   return (
-    <MyContext.Provider value={{ state, dispatch }}>
+    <main>
       <h1 className="title">Let's Go Pokemon Battle!</h1>
       <audio>
         <source src={music}></source>
       </audio>
-      <audio id="action-sound">
-        <source></source>
-      </audio>
+
       {pokemon && randomPokemon ? (
         <Game
           pokemon={pokemon}
@@ -47,7 +41,7 @@ function App() {
           setErrorMessage={setErrorMessage}
         />
       )}
-    </MyContext.Provider>
+    </main>
   );
 }
 
