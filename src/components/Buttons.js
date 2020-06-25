@@ -4,6 +4,7 @@ import attackSound from "../sounds/attack.mp3";
 import berrySound from "../sounds/berry.mp3";
 import playSound from "../utils/playSFX";
 import MovesButtons from "./MovesButtons";
+import MovesContext from "../utils/MoveContext";
 
 function Buttons({ pokemon, randomPokemon }) {
   const [myHealthBar, setMyHealthBar] = React.useState(pokemon.hp);
@@ -92,68 +93,77 @@ function Buttons({ pokemon, randomPokemon }) {
     }
   };
 
+  const handleAttack = () => {
+    console.log(damage);
+    setPokemonName(pokemon.name + " used ");
+    setVsHealthBar(vsHealthBar - damage);
+    setDisable(true);
+    playSound(attackSound);
+  };
+
   return (
     <section>
-      <div className="health-bars">
-        <p data-testid="my-health">
-          My Health:
-          <span style={{ color: "rgb(0, 138, 4)" }}>
-            {myHealthBar < 0 ? 0 : myHealthBar}
-          </span>
-        </p>
-        <p data-testid="enemy-health">
-          Enemy Health:{" "}
-          <span style={{ color: "rgb(245, 15, 15)" }}>
-            {vsHealthBar < 0 ? 0 : vsHealthBar}
-          </span>
-        </p>
-      </div>
-
-      {pokemonAttack ? (
-        <p className="fight">
-          {pokemonName}
-          <span style={{ color: "rgb(247, 237, 32)" }}>{pokemonAttack}</span>!
-        </p>
-      ) : (
-        <p className="fight">It's Your Turn!</p>
-      )}
-
-      {myHealthBar <= 0 || vsHealthBar <= 0 ? (
-        <h3>Game over! </h3>
-      ) : (
-        <div className="button-box">
-          {showMoves ? (
-            <MovesButtons
-              pokemon={pokemon}
-              randomPokemon={randomPokemon}
-              setPokemonName={setPokemonName}
-              setPokemonAttack={setPokemonAttack}
-              vsHealthBar={vsHealthBar}
-              setVsHealthBar={setVsHealthBar}
-              setDisable={setDisable}
-              damage={damage}
-              setDamage={setDamage}
-              myMoves={myMoves}
-            />
-          ) : null}
-          <button
-            className="actionBtn"
-            id="attack"
-            disabled={disable}
-            onClick={() => setShowMoves(true)}
-          >
-            Use Attack
-          </button>
-          <button
-            className="actionBtn"
-            id="berry"
-            disabled={disable}
-            onClick={eatBerry}
-          >
-            Eat A Berry
-          </button>
+      <MovesContext.Provider
+        value={{
+          attack: [pokemonAttack, setPokemonAttack],
+          damage: [damage, setDamage],
+        }}
+      >
+        <div className="health-bars">
+          <p data-testid="my-health">
+            My Health:
+            <span style={{ color: "rgb(0, 138, 4)" }}>
+              {myHealthBar < 0 ? 0 : myHealthBar}
+            </span>
+          </p>
+          <p data-testid="enemy-health">
+            Enemy Health:{" "}
+            <span style={{ color: "rgb(245, 15, 15)" }}>
+              {vsHealthBar < 0 ? 0 : vsHealthBar}
+            </span>
+          </p>
         </div>
-      )}
+
+        {pokemonAttack ? (
+          <p className="fight">
+            {pokemonName}
+            <span style={{ color: "rgb(247, 237, 32)" }}>{pokemonAttack}</span>!
+          </p>
+        ) : (
+          <p className="fight">It's Your Turn!</p>
+        )}
+
+        {myHealthBar <= 0 || vsHealthBar <= 0 ? (
+          <h3>Game over! </h3>
+        ) : (
+          <div className="button-box">
+            {showMoves ? (
+              <MovesButtons
+                myMoves={myMoves}
+                handleAttack={() => handleAttack}
+              />
+            ) : null}
+            <button
+              className="actionBtn"
+              id="attack"
+              disabled={disable}
+              onClick={() => {
+                setShowMoves(true);
+              }}
+            >
+              Use Attack
+            </button>
+            <button
+              className="actionBtn"
+              id="berry"
+              disabled={disable}
+              onClick={eatBerry}
+            >
+              Eat A Berry
+            </button>
+          </div>
+        )}
+      </MovesContext.Provider>
     </section>
   );
 }
