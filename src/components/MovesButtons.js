@@ -13,6 +13,7 @@ function MovesButtons(props) {
   const [moveDamage, setMoveDamage] = damage;
   console.log(chooseMove);
   console.log(moveDamage);
+
   return (
     <div className="movesBtnBox">
       <button

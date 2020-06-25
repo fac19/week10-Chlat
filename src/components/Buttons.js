@@ -60,6 +60,10 @@ function Buttons({ pokemon, randomPokemon }) {
     );
     return vsmoveData;
   }
+  const randomMove = function (vsMoves) {
+    var keys = Object.keys(vsMoves);
+    return vsMoves[keys[(keys.length * Math.random()) << 0]];
+  };
 
   const eatBerry = () => {
     if (berryCount <= 3) {
@@ -84,20 +88,26 @@ function Buttons({ pokemon, randomPokemon }) {
       playSound(berrySound);
       setTimeout(() => setDisable(false), 1500);
     } else {
-      const vsDamage = Math.ceil(Math.random() * 10);
-      setMyHealthBar((prevState) => prevState - vsDamage);
+      const vsMove = Object.entries(vsMoves)[
+        Math.floor(Math.random() * Object.keys(vsMoves).length)
+      ];
+      console.log(vsMove[1].moveName);
+      console.log(vsMove);
+      console.log(vsMove[1].power);
+      setMyHealthBar((prevState) => prevState - vsMove[1].power);
       setPokemonName(randomPokemon.name + " used ");
-      setPokemonAttack(randomPokemon.moves[Math.floor(Math.random() * 2)]);
+      setPokemonAttack(vsMove[1].moveName);
       setTimeout(() => setDisable(false), 1500);
       playSound(attackSound);
     }
   };
 
   const handleAttack = () => {
-    console.log(damage);
     setPokemonName(pokemon.name + " used ");
     setVsHealthBar(vsHealthBar - damage);
     setDisable(true);
+    setShowMoves(false);
+    setTimeout(enemyAttack, 1500);
     playSound(attackSound);
   };
 
@@ -138,10 +148,7 @@ function Buttons({ pokemon, randomPokemon }) {
         ) : (
           <div className="button-box">
             {showMoves ? (
-              <MovesButtons
-                myMoves={myMoves}
-                handleAttack={() => handleAttack}
-              />
+              <MovesButtons myMoves={myMoves} handleAttack={handleAttack} />
             ) : null}
             <button
               className="actionBtn"
