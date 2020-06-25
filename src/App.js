@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import "./components/Buttons.css";
+import "./components/MovesButtons.css";
 import Game from "./components/Game";
 import StartGameForm from "./components/StartGameForm";
 import music from "./sounds/Pokemon-BattleMusic.mp3";
@@ -19,9 +21,7 @@ function App() {
       <audio>
         <source src={music}></source>
       </audio>
-      <audio id="action-sound">
-        <source></source>
-      </audio>
+
       {pokemon && randomPokemon ? (
         <Game
           pokemon={pokemon}

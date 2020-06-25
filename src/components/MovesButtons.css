@@ -1,0 +1,26 @@
+.movesBtnBox {
+    position: absolute;
+    left: 5%;
+    bottom: 10%;
+    width: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.movesBtn {
+    background-color: white;
+    margin: 0.5rem 1rem;
+    padding: 5px 8px;
+    font-size: 1.3rem;
+    border: none;
+
+}
+
+.movesBtn:hover {
+    text-decoration: underline;
+    color: red
+}

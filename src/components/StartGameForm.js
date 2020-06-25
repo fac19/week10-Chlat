@@ -11,6 +11,7 @@ const StartGameForm = (props) => {
       .then(createPokeData)
       .then((PokeData) => props.setRandomPokemon(PokeData))
       .catch(console.error);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.pokemon]);
 
   // creates object with pokemon data
@@ -19,8 +20,14 @@ const StartGameForm = (props) => {
       name: data.name,
       image: data.sprites.front_default,
       hp: data.stats["5"].base_stat,
-      move: data.moves.map((move) => move.move["name"]),
+      moves: [
+        data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
+        data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
+        data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
+        data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
+      ],
     };
+
     console.log(PokeData);
     return PokeData;
   };
@@ -56,7 +63,6 @@ const StartGameForm = (props) => {
         props.setErrorMessage("");
       })
       .then(playAudio)
-
       .catch(console.error);
   };
 
