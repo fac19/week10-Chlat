@@ -19,11 +19,13 @@ function Buttons({ pokemon, randomPokemon }) {
     move1: "",
     move2: "",
     move3: "",
+    move4: "",
   });
   const [vsMoves, setVsMoves] = React.useState({
     move1: "",
     move2: "",
     move3: "",
+    move4: "",
   });
 
   React.useEffect(() => {
@@ -103,8 +105,11 @@ function Buttons({ pokemon, randomPokemon }) {
     console.log(pokemonAttack);
     setDisable(true);
     setShowMoves(false);
-    setTimeout(enemyAttack, 1500);
     playSound(attackSound);
+
+    if (vsHealthBar >= 0) {
+      setTimeout(enemyAttack, 1500);
+    }
   };
 
   return (

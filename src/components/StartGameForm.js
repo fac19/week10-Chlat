@@ -24,6 +24,7 @@ const StartGameForm = (props) => {
         data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
         data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
         data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
+        data.moves[Math.floor(Math.random() * data.moves.length)].move["name"],
       ],
     };
 

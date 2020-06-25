@@ -39,6 +39,19 @@ function MovesButtons(props) {
       >
         {props.myMoves.move3.moveName}
       </button>
+      <button
+        className="movesBtn"
+        onClick={() => {
+          const move4 = props.myMoves.move4.moveName;
+          const move4damage = props.myMoves.move4.power;
+          props.handleAttack(move4, move4damage);
+          console.log(move4);
+          console.log(move4damage);
+        }}
+      >
+        {" "}
+        {props.myMoves.move4.moveName}
+      </button>
     </div>
   );
 }
