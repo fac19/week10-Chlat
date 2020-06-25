@@ -1,24 +1,16 @@
 import React from "react";
-import MovesContext from "../utils/MoveContext";
 
 function MovesButtons(props) {
-  const {
-    pokemonAttack,
-    setPokemonAttack,
-    damage,
-    setDamage,
-  } = React.useContext(MovesContext);
-
   return (
     <div className="movesBtnBox">
       <button
         className="movesBtn"
         onClick={() => {
-          setPokemonAttack(props.myMoves.move1.moveName);
-          setDamage(props.myMoves.move1.power);
-          props.handleAttack();
-          console.log(pokemonAttack);
-          console.log(damage);
+          const move1 = props.myMoves.move1.moveName;
+          const move1damage = props.myMoves.move1.power;
+          props.handleAttack(move1, move1damage);
+          console.log(move1);
+          console.log(move1damage);
         }}
       >
         {props.myMoves.move1.moveName}
@@ -26,11 +18,11 @@ function MovesButtons(props) {
       <button
         className="movesBtn"
         onClick={() => {
-          setPokemonAttack(props.myMoves.move2.moveName);
-          setDamage(props.myMoves.move2.power);
-          props.handleAttack();
-          console.log(pokemonAttack);
-          console.log(damage);
+          const move2 = props.myMoves.move2.moveName;
+          const move2damage = props.myMoves.move2.power;
+          props.handleAttack(move2, move2damage);
+          console.log(move2);
+          console.log(move2damage);
         }}
       >
         {props.myMoves.move2.moveName}
@@ -38,11 +30,11 @@ function MovesButtons(props) {
       <button
         className="movesBtn"
         onClick={() => {
-          setPokemonAttack(props.myMoves.move3.moveName);
-          setDamage(props.myMoves.move3.power);
-          props.handleAttack();
-          console.log(pokemonAttack);
-          console.log(damage);
+          const move3 = props.myMoves.move3.moveName;
+          const move3damage = props.myMoves.move3.power;
+          props.handleAttack(move3, move3damage);
+          console.log(move3);
+          console.log(move3damage);
         }}
       >
         {props.myMoves.move3.moveName}
