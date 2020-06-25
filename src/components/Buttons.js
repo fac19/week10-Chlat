@@ -29,7 +29,7 @@ function Buttons({ pokemon, randomPokemon }) {
   React.useEffect(() => {
     getMyMoves(pokemon);
     getVsMoves(randomPokemon);
-  }, [getMovesData]);
+  }, [pokemon, randomPokemon]);
 
   function getMyMoves(pokemon) {
     let num = 1;
@@ -60,10 +60,6 @@ function Buttons({ pokemon, randomPokemon }) {
     );
     return vsmoveData;
   }
-  const randomMove = function (vsMoves) {
-    var keys = Object.keys(vsMoves);
-    return vsMoves[keys[(keys.length * Math.random()) << 0]];
-  };
 
   const eatBerry = () => {
     if (berryCount <= 3) {
