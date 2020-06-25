@@ -1,0 +1,62 @@
+section {
+    font-family: 'Press Start 2P',
+        cursive;
+}
+
+button {
+    font-family: 'Gudea', sans-serif;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+
+.health-bars p {
+    display: inline;
+    margin: 4rem
+}
+
+.button-box {
+    margin: 2rem 0;
+}
+
+.actionBtn {
+    border: 2px solid black;
+    margin: 0 1rem;
+    padding: 7px 12px;
+    border-radius: 7px;
+    font-size: 1.6rem;
+    color: white
+}
+
+.actionBtn:hover {
+    color: rgb(219, 198, 198)
+}
+
+#attack {
+    background-color: rgb(189, 5, 5);
+}
+
+#attack:disabled {
+    background-color: gray;
+}
+
+#berry {
+    background-color: rgb(17, 20, 165);
+}
+
+#berry:disabled {
+    background-color: gray;
+}
+
+#again {
+    font-size: 1.2rem;
+    background-color: rgb(65, 65, 66)
+}
+
+.fight {
+    padding: 1rem;
+    font-size: 1.2rem;
+}
