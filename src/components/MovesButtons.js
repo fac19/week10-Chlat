@@ -1,27 +1,24 @@
 import React from "react";
 import MovesContext from "../utils/MoveContext";
 
-// import getMovesData from "../utils/getMovesData";
-// import playSound from "../utils/playSFX";
-// import attackSound from "../sounds/attack.mp3";
-
 function MovesButtons(props) {
-  // console.log(props.myMoves.move1);
-  // console.log(props.myMoves.move1.power);
-  const { attack, damage } = React.useContext(MovesContext);
-  const [chooseMove, setChooseMove] = attack;
-  const [moveDamage, setMoveDamage] = damage;
-  console.log(chooseMove);
-  console.log(moveDamage);
+  const {
+    pokemonAttack,
+    setPokemonAttack,
+    damage,
+    setDamage,
+  } = React.useContext(MovesContext);
 
   return (
     <div className="movesBtnBox">
       <button
         className="movesBtn"
         onClick={() => {
-          setChooseMove(props.myMoves.move1.moveName);
-          setMoveDamage(props.myMoves.move1.power);
+          setPokemonAttack(props.myMoves.move1.moveName);
+          setDamage(props.myMoves.move1.power);
           props.handleAttack();
+          console.log(pokemonAttack);
+          console.log(damage);
         }}
       >
         {props.myMoves.move1.moveName}
@@ -29,9 +26,11 @@ function MovesButtons(props) {
       <button
         className="movesBtn"
         onClick={() => {
-          setChooseMove(props.myMoves.move2.moveName);
-          setMoveDamage(props.myMoves.move2.power);
+          setPokemonAttack(props.myMoves.move2.moveName);
+          setDamage(props.myMoves.move2.power);
           props.handleAttack();
+          console.log(pokemonAttack);
+          console.log(damage);
         }}
       >
         {props.myMoves.move2.moveName}
@@ -39,9 +38,11 @@ function MovesButtons(props) {
       <button
         className="movesBtn"
         onClick={() => {
-          setChooseMove(props.myMoves.move3.moveName);
-          setMoveDamage(props.myMoves.move3.power);
+          setPokemonAttack(props.myMoves.move3.moveName);
+          setDamage(props.myMoves.move3.power);
           props.handleAttack();
+          console.log(pokemonAttack);
+          console.log(damage);
         }}
       >
         {props.myMoves.move3.moveName}

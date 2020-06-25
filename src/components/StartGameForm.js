@@ -11,7 +11,8 @@ const StartGameForm = (props) => {
       .then(createPokeData)
       .then((PokeData) => props.setRandomPokemon(PokeData))
       .catch(console.error);
-  }, [props, props.pokemon]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.pokemon]);
 
   // creates object with pokemon data
   const createPokeData = (data) => {

@@ -7,14 +7,14 @@ import MovesButtons from "./MovesButtons";
 import MovesContext from "../utils/MoveContext";
 
 function Buttons({ pokemon, randomPokemon }) {
+  const [pokemonAttack, setPokemonAttack] = React.useState("");
+  const [damage, setDamage] = React.useState("");
   const [myHealthBar, setMyHealthBar] = React.useState(pokemon.hp);
   const [vsHealthBar, setVsHealthBar] = React.useState(randomPokemon.hp);
   const [pokemonName, setPokemonName] = React.useState("");
-  const [pokemonAttack, setPokemonAttack] = React.useState("");
   const [disable, setDisable] = React.useState(false);
   const [berryCount, setBerryCount] = React.useState(1);
   const [showMoves, setShowMoves] = React.useState(false);
-  const [damage, setDamage] = React.useState(0);
   const [myMoves, setMyMoves] = React.useState({
     move1: "",
     move2: "",
@@ -87,9 +87,6 @@ function Buttons({ pokemon, randomPokemon }) {
       const vsMove = Object.entries(vsMoves)[
         Math.floor(Math.random() * Object.keys(vsMoves).length)
       ];
-      console.log(vsMove[1].moveName);
-      console.log(vsMove);
-      console.log(vsMove[1].power);
       setMyHealthBar((prevState) => prevState - vsMove[1].power);
       setPokemonName(randomPokemon.name + " used ");
       setPokemonAttack(vsMove[1].moveName);
@@ -101,6 +98,9 @@ function Buttons({ pokemon, randomPokemon }) {
   const handleAttack = () => {
     setPokemonName(pokemon.name + " used ");
     setVsHealthBar(vsHealthBar - damage);
+    // setPokemonAttack(pokemonAttack);
+    console.log(damage);
+    console.log(pokemonAttack);
     setDisable(true);
     setShowMoves(false);
     setTimeout(enemyAttack, 1500);
@@ -109,11 +109,9 @@ function Buttons({ pokemon, randomPokemon }) {
 
   return (
     <section>
+      <audio id="action-sound"></audio>
       <MovesContext.Provider
-        value={{
-          attack: [pokemonAttack, setPokemonAttack],
-          damage: [damage, setDamage],
-        }}
+        value={{ pokemonAttack, setPokemonAttack, damage, setDamage }}
       >
         <div className="health-bars">
           <p data-testid="my-health">
