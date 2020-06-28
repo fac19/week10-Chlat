@@ -6,11 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Home
 
-![home](https://i.imgur.com/5ji9ipL.png =500x)
+![home](https://i.imgur.com/5ji9ipL.png)
 
 ## Battle
 
-![battle](https://i.imgur.com/GvmnmZ7.png =500x)
+![battle](https://i.imgur.com/GvmnmZ7.png)
 
 > There it is! Tauros's Horn Attack!
 > But Farfetchd dodges it marvelously! And behold! Farfetchd's Pound is a critical hit! This doesen't look good for Tauros. He is about to faint! Tauros eats the berry he was holding! But is it too late for Tauros... Find out in the next episode!
