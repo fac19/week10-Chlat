@@ -22,6 +22,7 @@ function Buttons({ pokemon, randomPokemon }) {
     playSound(attackSound);
   };
 
+  //attack enemy or heal
   const handleAttackClick = () => {
     const damage = Math.ceil(Math.random() * 10);
     setVsHealthBar(vsHealthBar - damage);
