@@ -38,7 +38,6 @@ const StartGameForm = (props) => {
         props.setErrorMessage("");
       })
       .then(playAudio)
-      //.catch(console.error);
       .catch(() => {
         props.setErrorMessage("That's Not A Pokemon!");
         console.error();
@@ -85,7 +84,7 @@ const StartGameForm = (props) => {
           id="random"
           onClick={handleGeneratePokemon}
         >
-          Generate Random Pokemon
+          Generate A Random Pokemon
         </button>
       </div>
       <div className="waiting">
